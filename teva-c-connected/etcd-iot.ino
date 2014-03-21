@@ -11,8 +11,10 @@ char service[] = "test";
 IPAddress remote(192,168,1,3);
 // IP Address to use if DHCP is unsuccessful.
 IPAddress ip(192,168,1,8);
-// Port number
-EthernetServer server(80);
+// Server port number
+int port = 80;
+
+EthernetServer server(port);
 EthernetClient advertiser;
 
 void setup() {
@@ -32,7 +34,8 @@ void setup() {
   advertiser.println("Content-type: application/x-www-form-urlencoded");
   advertiser.println("Content-length: 8");
   advertiser.println();
-  advertiser.println("value=80");
+  advertiser.print("value=");
+  advertiser.println(port);
   advertiser.stop();
  }
  else {
